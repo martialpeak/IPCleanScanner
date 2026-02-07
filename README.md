@@ -1,5 +1,7 @@
 ﻿# IPCleanScanner 🚀
 
+[فارسی](README-fa.md) | [English](README.md)
+
 IPCleanScanner is a **Fastly clean IP scanner and tester** for your **v2rayN** configurations. It helps you find usable clean IPs and then **test them directly against your own config** so you can quickly pick the best working options.
 
 ![IPCleanScanner Screenshot](screenshot.jpg)
@@ -63,4 +65,6 @@ IPCleanScanner is a **Fastly clean IP scanner and tester** for your **v2rayN** c
 ---
 
 Made with focus on speed and practical results. ✅
+
+
 
