@@ -2,12 +2,12 @@
 
 [فارسی](README-fa.md) | [English](README.md)
 
-IPCleanScanner is a **Fastly clean IP scanner and tester** for your **v2rayN** configurations. It helps you find usable clean IPs and then **test them directly against your own config** so you can quickly pick the best working options.
+IPCleanScanner is a **Cloudflare / Fastly clean IP scanner and tester** for your **v2rayN** configurations. It helps you find usable clean IPs and then **test them directly against your own config** so you can quickly pick the best working options.
 
 ![IPCleanScanner Screenshot](screenshot.jpg)
 
 ## ✨ Features
-- ⚡ Fast scanning for **clean Fastly IPs**
+- ⚡ Fast scanning for **clean Cloudflare / Fastly IPs**
 - 🧪 **Test scanned IPs** directly on your **own config** (Xray‑based)
 - 📄 Load **JSON export** from v2rayN
 - 🎯 Focused on **Cloudflare / Fastly** workflows
@@ -25,7 +25,7 @@ IPCleanScanner is a **Fastly clean IP scanner and tester** for your **v2rayN** c
 - 📋 One‑click **copy IPs** from result tables
 
 ## ✅ What This App Does
-- Scans and detects clean Fastly IPs
+- Scans and detects clean Cloudflare / Fastly IPs
 - Lets you **test those IPs on your own config** to validate real‑world performance
 
 ## 📦 How To Export Your Config From v2rayN
