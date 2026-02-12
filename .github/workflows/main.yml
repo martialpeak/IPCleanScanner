@@ -1,10 +1,18 @@
-name: Build Windows EXE
+name: Build and Zip Release
 
 on:
   workflow_dispatch:
+    inputs:
+      version_tag:
+        description: 'Version Name (e.g., v1.0)'
+        required: true
+        default: 'v1.0'
+
+permissions:
+  contents: write
 
 jobs:
-  build:
+  build_and_zip:
     runs-on: windows-latest
 
     steps:
@@ -19,18 +27,31 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pyinstaller
-        pip install requests
-        pip install PyQt6
-        # اگر فایل requirements.txt وجود دارد، خط زیر را فعال کنید (علامت # اولش را بردارید)
+        pip install pyinstaller requests PyQt6
+        # اگر فایل requirements.txt دارید خط زیر را فعال کنید
         # pip install -r requirements.txt
 
     - name: Build EXE
-      # دستور ساخت فایل اجرایی به همراه جمع‌آوری تمام وابستگی‌ها
+      # فایل exe را می‌سازیم
       run: pyinstaller --onefile --windowed --clean IPCleanScanner.py
 
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v4
+    - name: Copy Folders to Dist
+      # این دستور پوشه‌های asset, bin, config را کنار فایل exe کپی می‌کند
+      run: |
+        Copy-Item -Path "asset" -Destination "dist\asset" -Recurse
+        Copy-Item -Path "bin" -Destination "dist\bin" -Recurse
+        Copy-Item -Path "config" -Destination "dist\config" -Recurse
+
+    - name: Create ZIP file
+      # همه چیز را داخل یک فایل فشرده می‌گذارد
+      run: Compress-Archive -Path dist\* -DestinationPath IPCleanScanner-${{ inputs.version_tag }}.zip
+
+    - name: Create Release and Upload ZIP
+      uses: softprops/action-gh-release@v1
       with:
-        name: IPCleanScanner-Windows
-        path: dist/IPCleanScanner.exe
+        tag_name: ${{ inputs.version_tag }}
+        name: Release ${{ inputs.version_tag }}
+        # فایل زیپ نهایی را آپلود می‌کند
+        files: IPCleanScanner-${{ inputs.version_tag }}.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
