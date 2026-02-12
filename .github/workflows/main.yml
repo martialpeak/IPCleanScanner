@@ -1,11 +1,11 @@
 name: Build Windows EXE
 
 on:
-  workflow_dispatch:  # این خط باعث می‌شود دکمه دستی برای اجرا ظاهر شود
+  workflow_dispatch:
 
 jobs:
   build:
-    runs-on: windows-latest  # درخواست کامپیوتر ویندوزی
+    runs-on: windows-latest
 
     steps:
     - name: Checkout code
@@ -20,14 +20,14 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install pyinstaller
-        # اگر برنامه نیاز به کتابخانه خاصی مثل requests دارد، نصب می‌شود:
-        pip install requests 
-        # اگر فایل requirements.txt وجود داشت، خط زیر را از کامنت در بیاورید:
+        pip install requests
+        pip install PyQt6
+        # اگر فایل requirements.txt وجود دارد، خط زیر را فعال کنید (علامت # اولش را بردارید)
         # pip install -r requirements.txt
 
     - name: Build EXE
-      # دستور ساخت فایل اجرایی
-      run: pyinstaller --onefile IPCleanScanner.py
+      # دستور ساخت فایل اجرایی به همراه جمع‌آوری تمام وابستگی‌ها
+      run: pyinstaller --onefile --windowed --clean IPCleanScanner.py
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
